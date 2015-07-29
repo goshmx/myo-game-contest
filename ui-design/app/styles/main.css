@@ -1,0 +1,120 @@
+body {
+  background: #CCC url("../images/bg.jpg") center center no-repeat;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #FFF;
+  margin: 0;
+  min-width: 900px;
+}
+header{
+  background: rgba(255,255,255,0.1);
+  padding: 10px 0 5px 0;
+}
+
+#main-head{
+  max-width: 900px;
+  margin: 0 auto;
+  height: 70px;
+}
+
+#logo{
+  float: left;
+}
+
+#logo img{
+  width: 200px;
+}
+
+#user{
+  float: right;
+}
+
+#user p{
+  float: left;
+  padding:  0 10px;
+  font-size: 12px;
+  line-height: 40px;
+}
+
+#user img{
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid #FFF;
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+#navbar{
+  background: rgba(217,0,217,0.4);
+}
+
+#menu{
+  padding: 0;
+  list-style: none;
+  margin: 0 auto;
+  max-width: 900px;
+}
+#menu li{
+  display: inline-block;
+}
+#menu li a{
+  text-decoration: none;
+  color: #ffffff;
+  padding: 15px 20px;
+  display: inline-block;
+}
+
+#menu li a:hover{
+  background: rgba(217,0,217,0.4);
+}
+
+.share{
+  float: right;
+  padding: 15px;
+}
+
+#login{
+  width: 250px;
+  margin: 0 auto;
+  padding: 100px;
+}
+#login a img{
+  border-radius: 10px;
+}
+
+#login a img:hover{
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #666;
+}
+
+.hide{
+  display: none;
+}
+
+
+#partida{
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#tablero{
+  width: 80%;
+  float: left;
+}
+
+#status{
+  float: right;
+}
+
+td{
+  margin: 3px;
+}
+
+.img-card{
+  margin: 5px;
+  border: 5px solid #ffffff;
+}
