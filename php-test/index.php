@@ -8,6 +8,8 @@ $instagram = new Instagram(array(
     'apiCallback' => 'http://dev.gosh/myo-game-contest/php-test/'
 ));
 $result = false;
+$login = false;
+$error = false;
 if (isset($_GET['code'])) {
     $code = $_GET['code'];
     $data = $instagram->getOAuthToken($code);
@@ -20,7 +22,7 @@ if (isset($_GET['code'])) {
         echo $usuario->profile_picture;
     }
     else{
-        echo "<a href='{$instagram->getLoginUrl()}'>Connect to Intagram Account to play!</a>";
+        $login = true;
     }
 } else {
     echo "<a href='{$instagram->getLoginUrl()}'>Connect to Intagram Account to play!</a>";

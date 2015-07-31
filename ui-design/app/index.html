@@ -7,11 +7,6 @@
     <title>ui design</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
@@ -35,9 +30,16 @@
       </div>
       <div id="navbar">
         <ul id="menu">
-          <li><a href="#modal-one">Instruccions</a></li>
-          <li><a href="#">About</a></li>
-          <li class="share">Share</li>
+          <li><a href="#modal-instructions">Instructions</a></li>
+          <li><a href="#modal-about">About</a></li>
+          <li class="share">Share
+            <a target="_blank" id="share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://goshmx.com/memorama/">
+              <img src="images/facebook.png" alt="Facebook"/>
+            </a>
+            <a target="_blank" id="share_tw" href="https://twitter.com/home?status=Check%20out%20this%20app%20for%20MYO!%20http://goshmx.com/memorama/">
+              <img src="images/twitter.png" alt="Twitter"/>
+            </a>
+          </li>
         </ul>
       </div>
     </header>
@@ -51,26 +53,47 @@
 
       </div>
       <div id="status">
-        <p id="oportunities">Oportunities <span>5</span></p>
-        <p id="points">Points <span>0</span></p>
-        <div id="estado"></div>
+        <div id="message">
+          <p id="oportunities">Oportunities <span>5</span></p>
+          <p id="points">Points <span>0</span></p>
+          <div id="estado"></div>
+        </div>
+        <div class="char thinking"></div>
       </div>
     </section>
 
 
 
 
-    <div class="modal" id="modal-one" aria-hidden="true">
+    <div class="modal" id="modal-instructions" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-header">
-          <h2>Modal in CSS?</h2>
-          <a href="#close" class="btn-close" aria-hidden="true">×</a> <!--CHANGED TO "#close"-->
+          <h2>Instructions</h2>
+          <a href="#close" class="btn-close" aria-hidden="true">×</a>
         </div>
         <div class="modal-body">
-          <p>One modal example here! :D</p>
+          <p>Memorama using your Instagram account to use your photos as cards.</p>
+          <p><img src="images/instructions.png" alt="Instructions"/></p>
+          <p>Memorama is simple to play , you have 10 opportunities to turn the 6 pairs of cards and win the game .</p>
         </div>
         <div class="modal-footer">
-          <a href="#close" class="btn">Nice!</a>  <!--CHANGED TO "#close"-->
+          <a href="#close" class="btn">Al right! Let's play!</a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="modal" id="modal-about" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h2>About Memorama</h2>
+          <a href="#close" class="btn-close" aria-hidden="true">×</a>
+        </div>
+        <div class="modal-body">
+          <p>My name is Gosh hernandez i am a web developer Oaxaca, Mexico.</p>
+          <p>The game "Memorama" was born as an idea for the event <strong>two Swag 2 Furious</strong> organized by <strong>Thalmic Labs</strong> to develop on its product MYO. I hope you enjoy it!</p>
+          <p>Any questions or comments on my twitter: <a target="_blank" href="http://twitter.com/gosh_">@gosh_</a> also I leave the code on github if anyone want to improved the project.</p>
+          <p><a href="https://github.com/goshmx/myo-game-contest">https://github.com/goshmx/myo-game-contest</a></p>
         </div>
       </div>
     </div>
@@ -85,7 +108,22 @@
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+      ga('create','UA-6571165-1');ga('send','pageview');
+    </script>
+
+    <script>
+
+      var instaimage=[];
+      instaimage[0]='https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s320x320/e15/11336075_1622561891337157_1996796769_n.jpg';
+      instaimage[1]='https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/11356983_843533335754059_1045354276_n.jpg';
+      instaimage[2]='https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s320x320/e15/11372183_887618871315083_1707412315_n.jpg';
+      instaimage[3]='https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/10684170_484833515026854_898775870_n.jpg';
+      instaimage[4]='https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s320x320/e15/11337152_1455923291375386_1022945904_n.jpg';
+      instaimage[5]='https://scontent.cdninstagram.com/hphotos-xaf1/l/t51.2885-15/s320x320/e15/11377890_1602862076631520_853791531_n.jpg';
+      instaimage[6]='https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/11255652_254563358047407_1888300431_n.jpg';
+      instaimage[7]='https://scontent.cdninstagram.com/hphotos-xtf1/t51.2885-15/s320x320/e15/11143044_1634796146739794_2140026999_n.jpg';
+      instaimage[8]='https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/s320x320/e15/11191448_831804936901229_1029293629_n.jpg';
+
     </script>
 
     <!-- build:js scripts/vendor.js -->

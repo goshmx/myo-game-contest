@@ -162,12 +162,12 @@ td{
   background: #fefefe;
   border: #333333 solid 1px;
   border-radius: 5px;
-  margin-left: -200px;
+  margin-left: -300px;
   position: fixed;
   left: 50%;
   top: -100%;
   z-index: 11;
-  width: 360px;
+  width: 560px;
   -webkit-transform: translate(0, -500%);
   -ms-transform: translate(0, -500%);
   transform: translate(0, -500%);
@@ -175,6 +175,7 @@ td{
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
+  color: #333333;
 }
 .modal-body {
   padding: 20px;
@@ -196,4 +197,66 @@ td{
 /*ADDED TO STOP SCROLLING TO TOP*/
 #close {
   display: none;
+}
+
+.btn {
+  background: #428bca;
+  border: #357ebd solid 1px;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 15px;
+  text-decoration: none;
+  text-align: center;
+  min-width: 60px;
+  position: relative;
+  transition: color .1s ease;
+  /* top: 40em;*/
+}
+.btn:hover {
+  background: #357ebd;
+}
+
+a{
+  color: #D00DDD;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #660066;
+}
+
+#message{
+  height: 200px;
+}
+
+.char{
+  width: 180px;
+  height: 300px;
+}
+
+.thinking{
+  background: url("../images/char-thinking.png") left bottom no-repeat;
+}
+.acierto{
+  background: url("../images/char-win.png") left bottom no-repeat;
+}
+.fallo{
+  background: url("../images/char-lose.png") left bottom no-repeat;
+}
+.perdio{
+  background: url("../images/char-lose-game.png") left bottom no-repeat;
+}
+.gano{
+  background: url("../images/char-win-game.png") left bottom no-repeat;
+}
+
+
+#menu li #share_fb{
+  padding: 0;
+}
+
+#menu li #share_tw{
+  padding: 0;
 }

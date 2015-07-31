@@ -1,18 +1,7 @@
 /* jshint devel:true */
 
-var instaimage=[];
-instaimage[0]='https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s320x320/e15/11336075_1622561891337157_1996796769_n.jpg';
-instaimage[1]='https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/11356983_843533335754059_1045354276_n.jpg';
-instaimage[2]='https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s320x320/e15/11372183_887618871315083_1707412315_n.jpg';
-instaimage[3]='https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/10684170_484833515026854_898775870_n.jpg';
-instaimage[4]='https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s320x320/e15/11337152_1455923291375386_1022945904_n.jpg';
-instaimage[5]='https://scontent.cdninstagram.com/hphotos-xaf1/l/t51.2885-15/s320x320/e15/11377890_1602862076631520_853791531_n.jpg';
-instaimage[6]='https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/11255652_254563358047407_1888300431_n.jpg';
-instaimage[7]='https://scontent.cdninstagram.com/hphotos-xtf1/t51.2885-15/s320x320/e15/11143044_1634796146739794_2140026999_n.jpg';
-instaimage[8]='https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/s320x320/e15/11191448_831804936901229_1029293629_n.jpg';
-
 var numImagenes = 8;
-var perder = 5;
+var perder = 10;
 
 var nums = [];
 var cant = 6;
@@ -46,18 +35,18 @@ $(document).ready(function(){
     init();
     $('#estado').html('');
     $('#points span').html('0');
-    $('#oportunities span').html('5');
+    $('#oportunities span').html(perder);
     return false;
   });
 
   Myo.connect();
 
   Myo.on('status', function(data){
-    console.log(data);
+    //console.log(data);
   });
 
   Myo.on('pose', function(pose){
-   console.log(pose);
+   //console.log(pose);
     if(pose == 'wave_in'){
       siguiente();
     }
@@ -110,6 +99,8 @@ function init(){
   s = 1;
   generaTabla();
   $('#table-cards:first-child tr:first-child td:first-child img').addClass('selected');
+  $('#points span').html('0');
+  $('#oportunities span').html(perder);
 }
 
 function reinicializa(){
@@ -146,8 +137,7 @@ function generaTabla(){
 
 function gira(cual,carta){
   if(perdio == true){
-    document.formu.visor.value="Juego Finalizado"
-    setTimeout('document.location.reload()',2000)
+
   }
   if(cual != gi1){
     cont++;
@@ -160,19 +150,25 @@ function gira(cual,carta){
 }
 function comp(){
   if(gi1.src == gi2.src){
+    restaura_char('acierto');
+    setTimeout("restaura_char('thinking')",1500);
     gi1.onclick=null;
     gi2.onclick=null;
-    $('#oportunities span').html(intentos);
+    $('#oportunities span').html(perder-intentos);
     acrtos++;
     puntos = puntos+10;
     $('#points span').html(puntos);
     if(acrtos == cant){
       finJuego('gana');
+      restaura_char('gano');
       gana = true;
     }
     cont = 0;
   }
   else{
+    reset_char();
+    asigna_char('fallo');
+    setTimeout("restaura_char('thinking')",1500);
     setTimeout("restaura()",1500);
   }
 
@@ -183,20 +179,21 @@ function restaura()
   setTimeout('gi2.src = "images/card.png";gi2=""',200)
   cont = 0;
   intentos ++;
-  $('#oportunities span').html(5-intentos);
+  $('#oportunities span').html(perder-intentos);
   if(intentos >= perder){
     cont = 4;
     finJuego('pierde');
+    restaura_char('perdio');
     perdio = true;
   }
 }
 function finJuego(cual) {
   if(cual == 'pierde'){
-    $('#estado').html('Agotaste tus ' + perder + ' intentos<br> Perdiste  :-( <a id="again" href="#">Play again!</a>');
+    $('#estado').html('Your ' + perder + '  chances were completed<br> You lose! <a id="again" href="#">Play again!</a>');
     cont='perdio';
   }
   if(cual == 'gana'){
-    $('#estado').html('Ganaste felicidades!<br> <a id="again" href="#">Play again!</a>');
+    $('#estado').html('You won! Congrats!<br> <a id="again" href="#">Play again!</a>');
     cont='gano';
   }
 }
@@ -261,4 +258,17 @@ function anterior(){
 function selecciona(){
   var elemento = $('.elem'+ubicacion)[0];
   gira(elemento,$('.elem'+ubicacion).attr('id'));
+}
+
+function reset_char(){
+  $('.char').removeClass('thinking').removeClass('acierto').removeClass('fallo').removeClass('perdio').removeClass('gano');
+}
+
+function asigna_char(mood){
+  $('.char').addClass(mood);
+}
+
+function restaura_char(mood){
+  reset_char();
+  asigna_char(mood);
 }
