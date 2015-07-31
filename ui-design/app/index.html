@@ -35,7 +35,7 @@
       </div>
       <div id="navbar">
         <ul id="menu">
-          <li><a href="#">Instruccions</a></li>
+          <li><a href="#modal-one">Instruccions</a></li>
           <li><a href="#">About</a></li>
           <li class="share">Share</li>
         </ul>
@@ -52,9 +52,29 @@
       </div>
       <div id="status">
         <p id="oportunities">Oportunities <span>5</span></p>
-        <p id="points">Points <span>10</span></p>
+        <p id="points">Points <span>0</span></p>
+        <div id="estado"></div>
       </div>
     </section>
+
+
+
+
+    <div class="modal" id="modal-one" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h2>Modal in CSS?</h2>
+          <a href="#close" class="btn-close" aria-hidden="true">×</a> <!--CHANGED TO "#close"-->
+        </div>
+        <div class="modal-body">
+          <p>One modal example here! :D</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#close" class="btn">Nice!</a>  <!--CHANGED TO "#close"-->
+        </div>
+      </div>
+    </div>
+    </div>
 
 
 
@@ -71,6 +91,7 @@
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/myo.js/myo.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

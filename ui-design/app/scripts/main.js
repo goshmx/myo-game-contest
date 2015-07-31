@@ -11,7 +11,6 @@ instaimage[6]='https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x3
 instaimage[7]='https://scontent.cdninstagram.com/hphotos-xtf1/t51.2885-15/s320x320/e15/11143044_1634796146739794_2140026999_n.jpg';
 instaimage[8]='https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/s320x320/e15/11191448_831804936901229_1029293629_n.jpg';
 
-var directorio = "imagenes";
 var numImagenes = 8;
 var perder = 5;
 
@@ -19,6 +18,7 @@ var nums = [];
 var cant = 6;
 var acrtos = 0;
 var intentos = 0;
+var puntos = 0;
 gana = false;
 perdio = false;
 
@@ -30,11 +30,49 @@ var imagenes = [];
 
 cont = 0;
 var gi1,gi2;
-
 var m;
+var ubicacion = 1;
 
 $(document).ready(function(){
 
+  init();
+
+  $('#tablero').on('click','.img-card',function(){
+    gira(this,$(this).attr('id'));
+  });
+
+  $('#estado').on('click','#again',function(){
+    reinicializa();
+    init();
+    $('#estado').html('');
+    $('#points span').html('0');
+    $('#oportunities span').html('5');
+    return false;
+  });
+
+  Myo.connect();
+
+  Myo.on('status', function(data){
+    console.log(data);
+  });
+
+  Myo.on('pose', function(pose){
+   console.log(pose);
+    if(pose == 'wave_in'){
+      siguiente();
+    }
+    if(pose == 'wave_out'){
+      anterior();
+    }
+    if(pose == 'fingers_spread'){
+      selecciona();
+    }
+  });
+
+});
+
+
+function init(){
   nums[0] = numeroRandom();
 
   for(m=1;m<=(cant-1);m++){
@@ -46,8 +84,6 @@ $(document).ready(function(){
   for(var w = 0; w < largo ; w++){
     nums[largo + w] = nums[w];
   }
-
-
 
   for(var q=0; q < nums.length; q++){
     if(q == nums.length-1){
@@ -72,14 +108,27 @@ $(document).ready(function(){
     imagenes[n].src = imagencilla;
   }
   s = 1;
-
   generaTabla();
-});
+  $('#table-cards:first-child tr:first-child td:first-child img').addClass('selected');
+}
 
-
+function reinicializa(){
+  nums = [];
+  cant = 6;
+  acrtos = 0;
+  intentos = 0;
+  puntos = 0;
+  gana = false;
+  perdio = false;
+  numero = 0;
+  lista = [];
+  imagenes = [];
+  cont = 0;
+  ubicacion =1;
+}
 
 function generaTabla(){
-  var html = '<table width="100" align="center">';
+  var html = '<table id="table-cards" width="100" align="center">';
   html+='<tr align="center">';
   for(p=1; p<=nums.length;p++){
     if(s > 4){
@@ -87,7 +136,7 @@ function generaTabla(){
       s=1;
     }
     html+='<td id="' + lista[p-1] + '"><a href="#" onclick="this.blur();return false">';
-    html+='<img class="img-card" id="' + lista[p-1] + '" onclick="gira(this,this.id)" src="images/card.png" width="150"';
+    html+='<img class="img-card elem'+p+'" id="' + lista[p-1] + '" src="images/card.png" width="150">';
     html+='</a></td>';
     s++;
   }
@@ -111,24 +160,20 @@ function gira(cual,carta){
 }
 function comp(){
   if(gi1.src == gi2.src){
-    setTimeout("gi1.style.borderColor='red'",200)
-    setTimeout("gi2.style.borderColor='red'",400)
-    gi1.onclick=null;gi2.onclick=null
-    intentos++;
+    gi1.onclick=null;
+    gi2.onclick=null;
     $('#oportunities span').html(intentos);
-    acrtos++
-    if(acrtos == cant)
-    {
-      finJuego('gana')
-      gana = true
+    acrtos++;
+    puntos = puntos+10;
+    $('#points span').html(puntos);
+    if(acrtos == cant){
+      finJuego('gana');
+      gana = true;
     }
-
-    cont = 0
+    cont = 0;
   }
-  else
-  {
-    setTimeout("restaura()",1500)
-
+  else{
+    setTimeout("restaura()",1500);
   }
 
 }
@@ -136,30 +181,29 @@ function restaura()
 {
   gi1.src = "images/card.png" ; gi1 =""
   setTimeout('gi2.src = "images/card.png";gi2=""',200)
-  cont = 0
-  intentos ++
-  $('#oportunities span').html(intentos);
-  if(intentos >= perder)
-  {
-    cont = 4
-    finJuego('pierde')
-    perdio = true
+  cont = 0;
+  intentos ++;
+  $('#oportunities span').html(5-intentos);
+  if(intentos >= perder){
+    cont = 4;
+    finJuego('pierde');
+    perdio = true;
   }
 }
 function finJuego(cual) {
-  document.getElementById('gana').style.top=(altoVentana -100)/2
-  document.getElementById('gana').style.left =(anchoVentana -200)/2
-  if(cual == 'pierde'){document.getElementById('mensaje').innerHTML = 'Agotaste tus ' + perder + ' intentos<br> Perdiste  :-(';cont='perdio'}
-  document.getElementById('gana').style.visibility = 'visible'
+  if(cual == 'pierde'){
+    $('#estado').html('Agotaste tus ' + perder + ' intentos<br> Perdiste  :-( <a id="again" href="#">Play again!</a>');
+    cont='perdio';
+  }
+  if(cual == 'gana'){
+    $('#estado').html('Ganaste felicidades!<br> <a id="again" href="#">Play again!</a>');
+    cont='gano';
+  }
 }
-function cierra()
-{document.getElementById('gana').style.visibility='hidden'}
-
-
 
 function numeroRandom(){
   var num = Math.ceil(Math.random() *numImagenes);
-  return num
+  return num;
 }
 
 function comprueba(nume){
@@ -196,4 +240,25 @@ function comprueba2(numerito){
     numero = numerito;
     return numerito;
   }
+}
+
+function siguiente(){
+  if(ubicacion<(cant*2)){
+    ubicacion++;
+    $('#table-cards tr td a img').removeClass('selected');
+    $('.elem'+ubicacion).addClass('selected');
+  }
+}
+
+function anterior(){
+  if(ubicacion>1){
+    ubicacion--;
+    $('#table-cards tr td a img').removeClass('selected');
+    $('.elem'+ubicacion).addClass('selected');
+  }
+}
+
+function selecciona(){
+  var elemento = $('.elem'+ubicacion)[0];
+  gira(elemento,$('.elem'+ubicacion).attr('id'));
 }
